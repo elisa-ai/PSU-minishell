@@ -27,7 +27,7 @@ int handle_exec_errno(shell_t *shell)
     return 0;
 }
 
-static void main_main_loop(shell_t *shell)
+static void check_parsing(shell_t *shell)
 {
     if (shell->tab && shell->tab[0]) {
         if (check_builtins(shell) == 0)
@@ -48,7 +48,7 @@ static int main_loop(shell_t *shell)
         if (var.line[0] != '\0' && var.line[my_strlen(var.line) - 1] == '\n')
             var.line[my_strlen(var.line) - 1] = '\0';
         parse_command(var.line, shell);
-        main_main_loop(shell);
+        check_parsing(shell);
     }
     return 0;
 }
